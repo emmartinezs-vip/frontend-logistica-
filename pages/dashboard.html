@@ -4,78 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - LogiTrans</title>
-
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/modulos.css">
 </head>
-<body>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
 
     <aside class="sidebar">
-
         <h2>LogiTrans</h2>
-
         <nav>
-
-            <a href="dashboard.html">
-                Dashboard
-            </a>
-
-            <a href="conductores.html">
-                Conductores
-            </a>
-
-            <a href="vehiculos.html">
-                Vehículos
-            </a>
-
-            <a href="rutas.html">
-                Rutas
-            </a>
-
-            <a href="viajes.html">
-                Viajes
-            </a>
-
+            <a href="dashboard.html" class="activo">Dashboard</a>
+            <a href="conductores.html">Conductores</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="programaciones.html">Programaciones</a>
+            <a href="seguimientos.html">Seguimientos</a>
         </nav>
-
-        <button id="btnLogout">
-            Cerrar sesión
-        </button>
-
+        <button id="btnLogout">Cerrar sesión</button>
     </aside>
 
     <main class="contenido">
-
-        <h1>
-            Sistema LogiTrans
-        </h1>
-
-        <p>
-            Bienvenido al sistema de gestión logística.
-        </p>
-
-        <div class="cards">
-
-            <div class="card">
-                Conductores
+        <h1>Sistema LogiTrans Express</h1>
+        <p style="color:#666;margin-bottom:24px">Bienvenido al sistema de gestión logística.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+            <div style="background:#fff;padding:20px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center">
+                <div style="font-size:28px;font-weight:bold;color:#3498db" id="totalConductores">-</div>
+                <div style="color:#666;font-size:14px;margin-top:6px">Conductores</div>
             </div>
-
-            <div class="card">
-                Vehículos
+            <div style="background:#fff;padding:20px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center">
+                <div style="font-size:28px;font-weight:bold;color:#27ae60" id="totalVehiculos">-</div>
+                <div style="color:#666;font-size:14px;margin-top:6px">Vehículos</div>
             </div>
-
-            <div class="card">
-                Rutas
+            <div style="background:#fff;padding:20px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-align:center">
+                <div style="font-size:28px;font-weight:bold;color:#e67e22" id="totalRutas">-</div>
+                <div style="color:#666;font-size:14px;margin-top:6px">Rutas</div>
             </div>
-
-            <div class="card">
-                Viajes
-            </div>
-
         </div>
-
     </main>
 
-    <script src="../js/dashboard.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        if (!checkAuth()) { }
+        (async () => {
+            const h = authHeaders();
+            try {
+                const [c, v, r] = await Promise.all([
+                    fetch(API_CONDUCTORES + '/conductores', { headers: h }).then(r => r.json()),
+                    fetch(API_VEHICULOS + '/vehiculos', { headers: h }).then(r => r.json()),
+                    fetch(API_RUTAS + '/rutas', { headers: h }).then(r => r.json())
+                ]);
+                document.getElementById('totalConductores').textContent = Array.isArray(c) ? c.length : '-';
+                document.getElementById('totalVehiculos').textContent = Array.isArray(v) ? v.length : '-';
+                document.getElementById('totalRutas').textContent = Array.isArray(r) ? r.length : '-';
+            } catch(e) {}
+        })();
+    </script>
 
 </body>
 </html>

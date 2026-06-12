@@ -1,137 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-
-    <title>
-        Gestión de Conductores
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conductores - LogiTrans</title>
+    <link rel="stylesheet" href="../css/modulos.css">
 </head>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
 
-<body>
+    <aside class="sidebar">
+        <h2>LogiTrans</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="conductores.html" class="activo">Conductores</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="programaciones.html">Programaciones</a>
+            <a href="seguimientos.html">Seguimientos</a>
+        </nav>
+        <button id="btnLogout">Cerrar sesión</button>
+    </aside>
 
-    <h1>
-        Gestión de Conductores
-    </h1>
+    <main class="contenido">
+        <h1>Gestión de Conductores</h1>
 
-    <a href="../index.html">
-        Volver al menú
-    </a>
+        <div class="card-form">
+            <h2 id="tituloForm">Registrar Conductor</h2>
+            <div id="msg"></div>
+            <input type="hidden" id="conductorId">
+            <div class="form-grid">
+                <div class="form-group"><label>Nombres</label><input type="text" id="nombres" required></div>
+                <div class="form-group"><label>Apellidos</label><input type="text" id="apellidos" required></div>
+                <div class="form-group"><label>Documento</label><input type="text" id="documento" required></div>
+                <div class="form-group"><label>Teléfono</label><input type="text" id="telefono" required></div>
+                <div class="form-group"><label>Correo</label><input type="email" id="correo" required></div>
+                <div class="form-group"><label>Número de licencia</label><input type="text" id="numero_licencia" required></div>
+                <div class="form-group"><label>Categoría de licencia</label><input type="text" id="categoria_licencia" placeholder="C2, C3..." required></div>
+                <div class="form-group"><label>Vencimiento licencia</label><input type="date" id="fecha_vencimiento_licencia" required></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" id="btnGuardar" onclick="guardarConductor()">Registrar</button>
+                <button class="btn btn-secondary" id="btnCancelar" onclick="cancelarEdicion()" style="display:none">Cancelar</button>
+            </div>
+        </div>
 
-    <hr>
+        <div class="tabla-wrap">
+            <h2 style="padding:16px 20px 12px">Lista de Conductores</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Nombres</th><th>Apellidos</th><th>Documento</th>
+                        <th>Teléfono</th><th>Licencia</th><th>Vencimiento</th><th>Estado</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaConductores"></tbody>
+            </table>
+        </div>
+    </main>
 
-    <h2>
-        Registrar conductor
-    </h2>
-
-    <form id="formConductor">
-
-        <input
-            type="text"
-            id="nombres"
-            placeholder="Nombres"
-            required
-        >
-
-        <input
-            type="text"
-            id="apellidos"
-            placeholder="Apellidos"
-            required
-        >
-
-        <input
-            type="text"
-            id="documento"
-            placeholder="Documento"
-            required
-        >
-
-        <input
-            type="text"
-            id="telefono"
-            placeholder="Teléfono"
-            required
-        >
-
-        <input
-            type="email"
-            id="correo"
-            placeholder="Correo"
-            required
-        >
-
-        <input
-            type="text"
-            id="numero_licencia"
-            placeholder="Número licencia"
-            required
-        >
-
-        <input
-            type="text"
-            id="categoria_licencia"
-            placeholder="Categoría licencia"
-            required
-        >
-
-        <label>
-            Fecha vencimiento licencia
-        </label>
-
-        <input
-            type="date"
-            id="fecha_vencimiento_licencia"
-            required
-        >
-
-        <br><br>
-
-        <button type="submit">
-            Guardar conductor
-        </button>
-
-    </form>
-
-    <hr>
-
-    <h2>
-        Lista de conductores
-    </h2>
-
-    <table border="1">
-
-        <thead>
-
-            <tr>
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Documento</th>
-                <th>Teléfono</th>
-                <th>Correo</th>
-                <th>Licencia</th>
-                <th>Categoría</th>
-                <th>Vencimiento</th>
-                <th>Estado</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="tablaConductores">
-
-        </tbody>
-
-    </table>
-
+    <script src="../js/api.js"></script>
     <script src="../js/conductores.js"></script>
 
 </body>
-
 </html>

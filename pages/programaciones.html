@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programaciones - LogiTrans</title>
+    <link rel="stylesheet" href="../css/modulos.css">
+</head>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
+
+    <aside class="sidebar">
+        <h2>LogiTrans</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="conductores.html">Conductores</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="programaciones.html" class="activo">Programaciones</a>
+            <a href="seguimientos.html">Seguimientos</a>
+        </nav>
+        <button id="btnLogout">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <h1>Programación de Viajes</h1>
+
+        <div class="card-form">
+            <h2 id="tituloForm">Programar Viaje</h2>
+            <div id="msg"></div>
+            <input type="hidden" id="programacionId">
+            <div class="form-grid cols-3">
+                <div class="form-group"><label>Conductor</label><select id="conductor_id" required><option value="">Seleccionar...</option></select></div>
+                <div class="form-group"><label>Vehículo</label><select id="vehiculo_id" required><option value="">Seleccionar...</option></select></div>
+                <div class="form-group"><label>Ruta</label><select id="ruta_id" required><option value="">Seleccionar...</option></select></div>
+                <div class="form-group"><label>Fecha de salida</label><input type="date" id="fecha_salida" required></div>
+                <div class="form-group"><label>Hora de salida</label><input type="time" id="hora_salida" required></div>
+                <div class="form-group"><label>Fecha estimada llegada</label><input type="date" id="fecha_estimada_llegada" required></div>
+                <div class="form-group" style="grid-column:span 3"><label>Observaciones</label><input type="text" id="observaciones"></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="guardarProgramacion()">Programar</button>
+                <button class="btn btn-secondary" id="btnCancelar" onclick="cancelarEdicion()" style="display:none">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="tabla-wrap">
+            <h2 style="padding:16px 20px 12px">Viajes Programados</h2>
+            <table class="tabla">
+                <thead>
+                    <tr><th>ID</th><th>Conductor ID</th><th>Vehículo ID</th><th>Ruta ID</th><th>Salida</th><th>Llegada est.</th><th>Estado</th><th>Acciones</th></tr>
+                </thead>
+                <tbody id="tablaProgramaciones"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/programaciones.js"></script>
+
+</body>
+</html>

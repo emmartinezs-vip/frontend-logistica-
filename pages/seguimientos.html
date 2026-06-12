@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimientos - LogiTrans</title>
+    <link rel="stylesheet" href="../css/modulos.css">
+</head>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
+
+    <aside class="sidebar">
+        <h2>LogiTrans</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="conductores.html">Conductores</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="programaciones.html">Programaciones</a>
+            <a href="seguimientos.html" class="activo">Seguimientos</a>
+        </nav>
+        <button id="btnLogout">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <h1>Seguimiento de Viajes</h1>
+        <div id="msg"></div>
+
+        <div class="card-form">
+            <h2>Acciones sobre un viaje</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Programación</label>
+                    <select id="programacion_id"><option value="">Seleccionar...</option></select>
+                </div>
+                <div class="form-group">
+                    <label>Novedad / Observación</label>
+                    <input type="text" id="novedad" placeholder="Descripción del evento...">
+                </div>
+                <div class="form-group">
+                    <label>Estado para novedad</label>
+                    <select id="estado_novedad">
+                        <option value="en_transito">En tránsito</option>
+                        <option value="retrasado">Retrasado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions" style="flex-wrap:wrap">
+                <button class="btn btn-success" onclick="iniciarViaje()">▶ Iniciar viaje</button>
+                <button class="btn btn-warning" onclick="registrarNovedad()">⚠ Registrar novedad</button>
+                <button class="btn btn-primary" onclick="finalizarViaje()">✓ Finalizar viaje</button>
+            </div>
+        </div>
+
+        <div class="card-form" id="seccionHistorial" style="display:none">
+            <h2>Historial del viaje seleccionado</h2>
+            <table class="tabla">
+                <thead><tr><th>ID</th><th>Fecha</th><th>Hora</th><th>Estado</th><th>Novedad</th></tr></thead>
+                <tbody id="tablaHistorial"></tbody>
+            </table>
+        </div>
+
+        <div class="tabla-wrap" style="margin-top:24px">
+            <h2 style="padding:16px 20px 12px">Todos los seguimientos</h2>
+            <table class="tabla">
+                <thead><tr><th>ID</th><th>Programación</th><th>Fecha</th><th>Hora</th><th>Estado</th><th>Novedad</th></tr></thead>
+                <tbody id="tablaSeguimientos"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/seguimientos.js"></script>
+
+</body>
+</html>

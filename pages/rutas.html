@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas - LogiTrans</title>
+    <link rel="stylesheet" href="../css/modulos.css">
+</head>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
+
+    <aside class="sidebar">
+        <h2>LogiTrans</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="conductores.html">Conductores</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="rutas.html" class="activo">Rutas</a>
+            <a href="programaciones.html">Programaciones</a>
+            <a href="seguimientos.html">Seguimientos</a>
+        </nav>
+        <button id="btnLogout">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <h1>Gestión de Rutas</h1>
+
+        <div class="card-form">
+            <h2 id="tituloForm">Registrar Ruta</h2>
+            <div id="msg"></div>
+            <input type="hidden" id="rutaId">
+            <div class="form-grid cols-3">
+                <div class="form-group"><label>Ciudad origen</label><input type="text" id="ciudad_origen" required></div>
+                <div class="form-group"><label>Ciudad destino</label><input type="text" id="ciudad_destino" required></div>
+                <div class="form-group"><label>Distancia (km)</label><input type="number" id="distancia" min="1" required></div>
+                <div class="form-group"><label>Tiempo estimado</label><input type="text" id="tiempo_estimado" placeholder="8 horas" required></div>
+                <div class="form-group" style="grid-column:span 2"><label>Observaciones</label><input type="text" id="observaciones"></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="guardarRuta()">Registrar</button>
+                <button class="btn btn-secondary" id="btnCancelar" onclick="cancelarEdicion()" style="display:none">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="tabla-wrap">
+            <h2 style="padding:16px 20px 12px">Lista de Rutas</h2>
+            <table class="tabla">
+                <thead>
+                    <tr><th>ID</th><th>Origen</th><th>Destino</th><th>Distancia (km)</th><th>Tiempo estimado</th><th>Observaciones</th><th>Acciones</th></tr>
+                </thead>
+                <tbody id="tablaRutas"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/rutas.js"></script>
+
+</body>
+</html>

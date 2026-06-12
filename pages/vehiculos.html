@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehículos - LogiTrans</title>
+    <link rel="stylesheet" href="../css/modulos.css">
+</head>
+<body style="display:flex;margin:0;font-family:Arial,sans-serif">
+
+    <aside class="sidebar">
+        <h2>LogiTrans</h2>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="conductores.html">Conductores</a>
+            <a href="vehiculos.html" class="activo">Vehículos</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="programaciones.html">Programaciones</a>
+            <a href="seguimientos.html">Seguimientos</a>
+        </nav>
+        <button id="btnLogout">Cerrar sesión</button>
+    </aside>
+
+    <main class="contenido">
+        <h1>Gestión de Vehículos</h1>
+
+        <div class="card-form">
+            <h2 id="tituloForm">Registrar Vehículo</h2>
+            <div id="msg"></div>
+            <input type="hidden" id="vehiculoId">
+            <div class="form-grid cols-3">
+                <div class="form-group"><label>Placa</label><input type="text" id="placa" required></div>
+                <div class="form-group"><label>Marca</label><input type="text" id="marca" required></div>
+                <div class="form-group"><label>Modelo (año)</label><input type="text" id="modelo" required></div>
+                <div class="form-group"><label>Tipo de vehículo</label><input type="text" id="tipo_vehiculo" placeholder="Camión, Furgón..." required></div>
+                <div class="form-group"><label>Capacidad de carga (kg)</label><input type="number" id="capacidad_carga" min="1" required></div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="guardarVehiculo()">Registrar</button>
+                <button class="btn btn-secondary" id="btnCancelar" onclick="cancelarEdicion()" style="display:none">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="tabla-wrap">
+            <h2 style="padding:16px 20px 12px">Lista de Vehículos</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Placa</th><th>Marca</th><th>Modelo</th>
+                        <th>Tipo</th><th>Capacidad (kg)</th><th>Estado</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaVehiculos"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/vehiculos.js"></script>
+
+</body>
+</html>
